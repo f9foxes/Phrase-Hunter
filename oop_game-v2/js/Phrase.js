@@ -15,12 +15,13 @@ class Phrase {
         for (let i = 0; i < this.phrase.length; i++) {
             let className;
             let letter = this.phrase[i];
+            let liElement = document.createElement('li');
             if (/\s/.test(letter)) {
                 className = 'space';
             } else {
                 className = 'hide letter';
             } 
-            let liElement = document.createElement('li');
+            
             liElement.innerHTML = `<li class="${className} ${letter}">${letter}</li>`;
             ulElement.appendChild(liElement);
         }

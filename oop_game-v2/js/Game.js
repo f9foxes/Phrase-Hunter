@@ -67,8 +67,17 @@ const phraseList = [
         return this.phrases[randomPhraseIndex];
      }
 
-     startGame() {
+     /**
+     * Begins game by selecting a random phrase and displaying it to user
+     */
 
+     startGame() {
+        let overlayDiv = document.getElementById('overlay');
+        overlayDiv.style.display = 'none';
+        let gamePhrase = this.getRandomPhrase();
+        let newGamePhrase  = new Phrase (gamePhrase);
+        newGamePhrase.addPhraseToDisplay();
+        this.activePhrase = gamePhrase;
      }
 
      handleInteraction() {
