@@ -77,7 +77,7 @@ const phraseList = [
         let gamePhrase = this.getRandomPhrase();
         let newGamePhrase  = new Phrase (gamePhrase);
         newGamePhrase.addPhraseToDisplay();
-        this.activePhrase = gamePhrase;
+        this.activePhrase = newGamePhrase;
      }
 
      handleInteraction() {
@@ -91,7 +91,17 @@ const phraseList = [
     */
 
      removeLife() {
-         
+        const  scoreBoard = document.getElementById('scoreboard').firstElementChild.children;
+        for (var i = scoreBoard.length - 1; i >= 0; i--) {
+            if  (scoreBoard[i].outerHTML = `"<img src="images/liveHeart.png" alt="Heart Icon" height="35" width="30">"`) {
+                scoreBoard[i].outerHTML = `"<img src="images/lostHeart.png" alt="Heart Icon" height="35" width="30">"`;
+                return;
+            }
+        }
+        this.missed += 1;
+        if (this.missed === 5) {
+            this.gameOver(this.checkForWin());
+        }
      };
 
      /**
@@ -112,10 +122,23 @@ const phraseList = [
         return result;
      };
 
+    
+
      /**
     * Displays game over message
     * @param {boolean} gameWon - Whether or not the user won the game
     */
 
-     gameOver(gameWon) {};
+     gameOver(gameWon) {
+        let overlayDiv = document.getElementById('overlay');
+        overlayDiv.style.display = 'display';
+        let  message = document.getElementById('game-over-message');
+        if (gameWon === true) {
+            message.innerText = 'Congratulations You WIN!';
+            overlayDiv.className = 'win';
+        } else {
+            message.innerText = `You Lost, the hidden phrase is:<br>${this.activePhrase}`;
+            overlayDiv.className = 'loose';
+        }
+     };
  }

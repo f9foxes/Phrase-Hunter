@@ -33,11 +33,11 @@ class Phrase {
     */
 
     checkLetter(letter) {
-        this.phrase.forEach(character => {
-            if (character = letter) {
-                this.showMatchedLetter(character);
+        for (let i = 0; i < this.phrase.length; i++) {
+            if (this.phrase[i] === letter) {
+                this.showMatchedLetter(this.phrase[i]);
             }
-        });
+        }
     }
 
     /**
@@ -48,9 +48,9 @@ class Phrase {
     showMatchedLetter(letter) {
         const letterBoxes = document.getElementById('phrase').firstElementChild.children;
         for (let i = 0; i < letterBoxes.length; i++) {
-            if (letterBoxex[i].innerText = letter) {
-                letterBoxes[i].className = 'show';
+            if (letterBoxes[i].firstElementChild.innerText === letter) {
+                letterBoxes[i].firstElementChild.className = 'show';
             }
-        };
+        }
     }
 }
