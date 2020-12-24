@@ -27,11 +27,30 @@ class Phrase {
         }
     }
 
-    checkLetter() {
+    /**
+    * Checks if passed letter is in phrase
+    * @param (string) letter - Letter to check
+    */
 
+    checkLetter(letter) {
+        this.phrase.forEach(character => {
+            if (character = letter) {
+                this.showMatchedLetter(character);
+            }
+        });
     }
 
-    showMatchedLetter() {
-        
+    /**
+    * Displays passed letter on screen after a match is found
+    * @param (string) letter - Letter to display
+    */
+
+    showMatchedLetter(letter) {
+        const letterBoxes = document.getElementById('phrase').firstElementChild.children;
+        for (let i = 0; i < letterBoxes.length; i++) {
+            if (letterBoxex[i].innerText = letter) {
+                letterBoxes[i].className = 'show';
+            }
+        };
     }
 }
