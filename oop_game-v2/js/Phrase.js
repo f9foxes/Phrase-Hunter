@@ -24,7 +24,7 @@ class Phrase {
             
             liElement.innerHTML = `<li class="${className} ${letter}">${letter}</li>`;
             ulElement.appendChild(liElement);
-        }
+        } 
     }
 
     /**
@@ -51,6 +51,9 @@ class Phrase {
             if (letterBoxes[i].firstElementChild.innerText === letter) {
                 letterBoxes[i].firstElementChild.className = 'show';
             }
+        }
+        if (game.checkForWin()) {
+            game.gameOver(true);
         }
     }
 }

@@ -92,17 +92,15 @@ const phraseList = [
 
      removeLife() {
         const  scoreBoard = document.getElementById('scoreboard').firstElementChild.children;
-        for (var i = scoreBoard.length - 1; i >= 0; i--) {
-            if  (scoreBoard[i].outerHTML = `"<img src="images/liveHeart.png" alt="Heart Icon" height="35" width="30">"`) {
-                scoreBoard[i].outerHTML = `"<img src="images/lostHeart.png" alt="Heart Icon" height="35" width="30">"`;
-                return;
-            }
-        }
         this.missed += 1;
-        if (this.missed === 5) {
+        if  (scoreBoard[this.missed - 1].outerHTML = `<img src="images/liveHeart.png" alt="Heart Icon" height="35" width="30">`) {
+            scoreBoard[this.missed - 1].outerHTML = `<img src="images/lostHeart.png" alt="Heart Icon" height="35" width="30">`;
+        }
+        console.log(this.missed);
+        if (this.missed === 5) { 
             this.gameOver(this.checkForWin());
         }
-     };
+    }
 
      /**
     * Checks for winning move
@@ -111,17 +109,17 @@ const phraseList = [
     */
 
      checkForWin() {
-        const phraseCheck = document.getElementById('phrase').firstElementChild.children;
-        let unFlipped = 0; 
-        for (let i = 0; i < phraseCheck.length; i++) {
-            if (phraseCheck[i].className = 'hide') {
-                unFlipped += 1;
+        const letterBoxes = document.getElementById('phrase').firstElementChild.children;
+        let allFlipped = true;
+        for (let i = 0; i < letterBoxes.length; i++) {
+            let boxClass = letterBoxes[i].firstElementChild.className;
+            if (boxClass.includes('hide')) {
+                allFlipped = false
             }
         }
-        let result = unflipped < 1 ? true : false;
-        return result;
-     };
-
+        console.log(allFlipped);
+        return  allFlipped;
+    }
     
 
      /**
@@ -131,14 +129,23 @@ const phraseList = [
 
      gameOver(gameWon) {
         let overlayDiv = document.getElementById('overlay');
-        overlayDiv.style.display = 'display';
+        overlayDiv.style.display = 'block';
+        let sections = document.getElementsByClassName('section');
+        for (let i = 0;  i < sections.length; i++) {
+            sections[i].style.display = 'none';
+        }
+       // sections.forEach(section  => section.style.display = 'none');
         let  message = document.getElementById('game-over-message');
         if (gameWon === true) {
-            message.innerText = 'Congratulations You WIN!';
             overlayDiv.className = 'win';
+            message.innerText = 'Congratulations You WIN!';
         } else {
-            message.innerText = `You Lost, the hidden phrase is:<br>${this.activePhrase}`;
-            overlayDiv.className = 'loose';
+            overlayDiv.className = 'lose';
+            message.innerText = `Sorry You Lost`;
+            console.log(message.innerText);
         }
-     };
+        const startButton = document.getElementById(`btn__reset`);
+        startButton.innerText = 'Try Again'
+        startButton.addEventListener('click', e => location.reload());
+    }
  }
