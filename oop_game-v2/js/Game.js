@@ -80,9 +80,24 @@ const phraseList = [
         this.activePhrase = newGamePhrase;
      }
 
-     handleInteraction() {
-
-     }
+     /**
+    * Handles onscreen keyboard button clicks
+    * @param (HTMLButtonElement) button - The clicked button element
+    */
+    handleInteraction(button) {
+        let letter = button.innerText;
+        let matchLetter = this.activePhrase.checkLetter(letter);
+        if (matchLetter) {
+            button.className = 'chosen';
+            let result = this.checkForWin();
+            if (result) {
+                this.gameOver(result);
+            }
+        } else {
+            button.className = 'wrong';
+            this.removeLife();
+        }
+    }
 
     /**
     * Increases the value of the missed property
@@ -96,7 +111,6 @@ const phraseList = [
         if  (scoreBoard[this.missed - 1].outerHTML = `<img src="images/liveHeart.png" alt="Heart Icon" height="35" width="30">`) {
             scoreBoard[this.missed - 1].outerHTML = `<img src="images/lostHeart.png" alt="Heart Icon" height="35" width="30">`;
         }
-        console.log(this.missed);
         if (this.missed === 5) { 
             this.gameOver(this.checkForWin());
         }
@@ -108,7 +122,7 @@ const phraseList = [
     won
     */
 
-     checkForWin() {
+    checkForWin() {
         const letterBoxes = document.getElementById('phrase').firstElementChild.children;
         let allFlipped = true;
         for (let i = 0; i < letterBoxes.length; i++) {
@@ -117,7 +131,6 @@ const phraseList = [
                 allFlipped = false
             }
         }
-        console.log(allFlipped);
         return  allFlipped;
     }
     
@@ -142,10 +155,7 @@ const phraseList = [
         } else {
             overlayDiv.className = 'lose';
             message.innerText = `Sorry You Lost`;
-            console.log(message.innerText);
         }
-        const startButton = document.getElementById(`btn__reset`);
         startButton.innerText = 'Try Again'
-        startButton.addEventListener('click', e => location.reload());
     }
- }
+}
