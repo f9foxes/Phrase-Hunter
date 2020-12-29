@@ -1,13 +1,10 @@
-/* Treehouse FSJS Techdegree
- * Project 4 - OOP Game App
- * Phrase.js */
 class Phrase {
     constructor(phrase) {
         this.phrase = phrase.toLowerCase();
     }
 
     /**
-    * Display phrase on game board
+    * Displays phrase on game board
     */
 
     addPhraseToDisplay() {
@@ -30,6 +27,7 @@ class Phrase {
     /**
     * Checks if passed letter is in phrase
     * @param (string) letter - Letter to check
+    * returns true or false;
     */
 
     checkLetter(letter) {

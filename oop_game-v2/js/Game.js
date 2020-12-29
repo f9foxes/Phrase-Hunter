@@ -1,6 +1,4 @@
-/* Treehouse FSJS Techdegree
- * Project 4 - OOP Game App
- * Game.js */
+// Array of phrases to source random phrase from.
 const phraseList = [
     'Between a Rock and a Hard Place',
     'Cry Over Spilt Milk',
@@ -69,6 +67,7 @@ const phraseList = [
 
      /**
      * Begins game by selecting a random phrase and displaying it to user
+     * Removes overlay when game starts.
      */
 
      startGame() {
@@ -83,6 +82,10 @@ const phraseList = [
      /**
     * Handles onscreen keyboard button clicks
     * @param (HTMLButtonElement) button - The clicked button element
+    * Changes the class name on the button.
+    * If there is a match, check to see if player has won.
+    * If the player wins, call gameOver method.
+    * If there is not a match, call removeLife method.
     */
     handleInteraction(button) {
         let letter = button.innerText;
@@ -100,6 +103,7 @@ const phraseList = [
     }
 
     /**
+    * 
     * Increases the value of the missed property
     * Removes a life from the scoreboard
     * Checks if player has remaining lives and ends game if player is out
@@ -147,7 +151,6 @@ const phraseList = [
         for (let i = 0;  i < sections.length; i++) {
             sections[i].style.display = 'none';
         }
-       // sections.forEach(section  => section.style.display = 'none');
         let  message = document.getElementById('game-over-message');
         if (gameWon === true) {
             overlayDiv.className = 'win';

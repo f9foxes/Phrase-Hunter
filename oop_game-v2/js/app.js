@@ -1,6 +1,4 @@
-/* Treehouse FSJS Techdegree
- * Project 4 - OOP Game App
- * app.js */
+// Set variables and get elements to be used in event listeners.
 
 let game;
 const overlayDiv = document.getElementById('overlay');
@@ -11,8 +9,13 @@ const ul = document.getElementById('phrase').firstElementChild;
 let sections = document.getElementsByClassName('section');
 const scoreBoard = document.getElementById('scoreboard').firstElementChild.children;
 let liItems = ul.children;
+let title = document.getElementById('banner').firstElementChild.innerText;
 
-
+/*
+If it's the first game, game is set to new Game class.
+startGame method is called on the new game class.
+If player is playing again, board is reset to begin a new game first.
+*/
 startButton.addEventListener('click', e =>  {
     if (ul.firstElementChild) {
         for (let i = 0; i < buttons.length; i++) {
@@ -31,14 +34,31 @@ startButton.addEventListener('click', e =>  {
         overlayDiv.style.display = 'none';
         overlayDiv.className = 'start';
     }
-       
     game = new Game();
     game.startGame();
     console.log(game.activePhrase);
 })
 
+// Listen for letters to be clicked.
+// If the letter clicked has not yet been clicked, (className = 'key') 
+    //handleInteraction method is passed the clicked letter button.
+
 keysDiv.addEventListener('click', e => {
     if (e.target.className === 'key'){
         game.handleInteraction(e.target);
+    }
+})
+
+// Listen for keydown event on keyboard.
+// Allow keyboard to be used for guessing letters only.
+// Letter clicked is matched with corresponding letter displayed and passed as an argument into the handleInteraction method.
+document.addEventListener('keydown',  e =>  {
+    let letter = e.key.toLocaleLowerCase();
+    if ((/[a-z]/).test(letter)) {
+        for (let i = 0; i < buttons.length; i++) {
+            if (buttons[i].innerText === letter && buttons[i].className === 'key') {
+                game.handleInteraction(buttons[i]);
+            }
+        }
     }
 })
