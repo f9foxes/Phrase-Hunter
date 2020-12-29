@@ -38,7 +38,6 @@ const phraseList = [
     */
 
     createPhrases() {
-        
         let randomPhraseList = [];
         let numList = [];
 
@@ -92,6 +91,7 @@ const phraseList = [
         let matchLetter = this.activePhrase.checkLetter(letter);
         if (matchLetter) {
             button.className = 'chosen';
+            this.activePhrase.showMatchedLetter(letter);
             let result = this.checkForWin();
             if (result) {
                 this.gameOver(result);

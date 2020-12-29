@@ -62,7 +62,11 @@ button {
 
 #btn__reset {
 	width: 200px;
-	margin: 0 auto;
+  margin: 0 auto;
+}
+
+#btn__reset:hover {
+  animation: shake 1s;
 }
 
 .main-container {

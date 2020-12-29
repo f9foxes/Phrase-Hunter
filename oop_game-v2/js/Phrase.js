@@ -35,7 +35,6 @@ class Phrase {
         for (let i = 0; i < this.phrase.length; i++) {
             if (this.phrase[i] === letter) {
                 match = true;
-                this.showMatchedLetter(this.phrase[i]);
             }
         }
         return match;

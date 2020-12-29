@@ -19,4 +19,15 @@ The game is reset and a new phrase is chosen by clicking the try again button.
 
 The goal is to win by guessing all the letters in the phrase before loosing all five hearts.
 
+EXTRA: 
+
+personal changes:
+    *  background added to onscreen keyboard
+    *  letters display green for correct guess and red for wrong guess
+    *  win or loose screen displays after 2 second timeout
+    *  The start button shakes on hover
+
+keydown event used to enble physical keyboard as well.
+
+
 
