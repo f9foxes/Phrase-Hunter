@@ -145,6 +145,7 @@ const phraseList = [
     */
 
      gameOver(gameWon) {
+        setTimeout(function () {
         let overlayDiv = document.getElementById('overlay');
         overlayDiv.style.display = 'block';
         let sections = document.getElementsByClassName('section');
@@ -159,6 +160,6 @@ const phraseList = [
             overlayDiv.className = 'lose';
             message.innerText = `Sorry You Lost`;
         }
-        startButton.innerText = 'Try Again'
+        startButton.innerText = 'Try Again';}, 2000);
     }
 }

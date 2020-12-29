@@ -55,6 +55,6 @@ class Phrase {
         }
         if (game.checkForWin()) {
             game.gameOver(true);
-        }
+        };
     }
 }
