@@ -84,19 +84,21 @@ const phraseList = [
     * If there is not a match, call removeLife method.
     */
     handleInteraction(button) {
-        button.disabled = true;
-        let letter = button.innerText;
-        let matchLetter = this.activePhrase.checkLetter(letter);
-        if (matchLetter) {
-            button.classList.add("chosen");
-            this.activePhrase.showMatchedLetter(letter);
-            let result = this.checkForWin();
-            if (result) {
-                this.gameOver(result);
+        if (button.className === 'key') {
+            button.disabled = true;
+            let letter = button.innerText;
+            let matchLetter = this.activePhrase.checkLetter(letter);
+            if (matchLetter) {
+                button.classList.add("chosen");
+                this.activePhrase.showMatchedLetter(letter);
+                let result = this.checkForWin();
+                if (result) {
+                    this.gameOver(result);
+                }
+            } else {
+                button.classList.add("wrong");
+                this.removeLife();
             }
-        } else {
-            button.classList.add("wrong");
-            this.removeLife();
         }
     }
 
@@ -143,6 +145,8 @@ const phraseList = [
     */
 
      gameOver(gameWon) {
+        const buttons = keysDiv.querySelectorAll('button');
+        buttons.forEach(button => button.disabled = true);
         setTimeout(function () {
         let overlayDiv = document.getElementById('overlay');
         overlayDiv.style.display = 'block';

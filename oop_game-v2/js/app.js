@@ -45,9 +45,7 @@ startButton.addEventListener('click', e =>  {
     //handleInteraction method is passed the clicked letter button.
 
 keysDiv.addEventListener('click', e => {
-    if(e.target.className === 'key') {
         game.handleInteraction(e.target);
-    }
 })
 
 // Listen for keydown event on keyboard.
@@ -57,7 +55,7 @@ document.addEventListener('keydown',  e =>  {
     let letter = e.key.toLocaleLowerCase();
     if ((/[a-z]/).test(letter)) {
         for (let i = 0; i < buttons.length; i++) {
-            if (buttons[i].innerText === letter) {
+            if (buttons[i].innerText === letter && !buttons[i].disabled) {
                 game.handleInteraction(buttons[i]);
             }
         }
