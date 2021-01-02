@@ -29,7 +29,7 @@ const phraseList = [
      constructor() {
          this.missed = 0;
          this.phrases = this.createPhrases();
-         this.activePhrase = null;
+         this.activePhrase = new Phrase (this.getRandomPhrase());
      }
 
     /**
@@ -43,14 +43,14 @@ const phraseList = [
 
         while (numList.length < 5) {
             let randomListNumber = Math.floor(Math.random() * (phraseList.length));
-            if (numList.length === 0) {
+    
+            if (numList.every(number => number !== randomListNumber)) {
                 numList.push(randomListNumber);
-                randomPhraseList.push((phraseList[randomListNumber]));
-            } else if (numList.every(number => number !== randomListNumber)) {
-                numList.push(randomListNumber);
-                randomPhraseList.push((phraseList[randomListNumber]));
+                let phrase = {phrase: phraseList[randomListNumber]}
+                randomPhraseList.push(phrase);
             }  
         }
+        console.log(randomPhraseList);
         return randomPhraseList;
     };
 
@@ -72,10 +72,7 @@ const phraseList = [
      startGame() {
         let overlayDiv = document.getElementById('overlay');
         overlayDiv.style.display = 'none';
-        let gamePhrase = this.getRandomPhrase();
-        let newGamePhrase  = new Phrase (gamePhrase);
-        newGamePhrase.addPhraseToDisplay();
-        this.activePhrase = newGamePhrase;
+        this.activePhrase.addPhraseToDisplay();
      }
 
      /**
@@ -87,17 +84,18 @@ const phraseList = [
     * If there is not a match, call removeLife method.
     */
     handleInteraction(button) {
+        button.disabled = true;
         let letter = button.innerText;
         let matchLetter = this.activePhrase.checkLetter(letter);
         if (matchLetter) {
-            button.className = 'chosen';
+            button.classList.add("chosen");
             this.activePhrase.showMatchedLetter(letter);
             let result = this.checkForWin();
             if (result) {
                 this.gameOver(result);
             }
         } else {
-            button.className = 'wrong';
+            button.classList.add("wrong");
             this.removeLife();
         }
     }

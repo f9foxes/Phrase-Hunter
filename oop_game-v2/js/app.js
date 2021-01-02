@@ -19,7 +19,8 @@ If player is playing again, board is reset to begin a new game first.
 startButton.addEventListener('click', e =>  {
     if (ul.firstElementChild) {
         for (let i = 0; i < buttons.length; i++) {
-                buttons[i].className = 'key';
+                buttons[i].classList.remove('chosen', 'wrong');
+                buttons[i].disabled = false;
         }
         for (let i = 0;  i < sections.length; i++) {
             sections[i].style.display = 'block';
@@ -44,7 +45,7 @@ startButton.addEventListener('click', e =>  {
     //handleInteraction method is passed the clicked letter button.
 
 keysDiv.addEventListener('click', e => {
-    if (e.target.className === 'key'){
+    if(e.target.className === 'key') {
         game.handleInteraction(e.target);
     }
 })
@@ -56,7 +57,7 @@ document.addEventListener('keydown',  e =>  {
     let letter = e.key.toLocaleLowerCase();
     if ((/[a-z]/).test(letter)) {
         for (let i = 0; i < buttons.length; i++) {
-            if (buttons[i].innerText === letter && buttons[i].className === 'key') {
+            if (buttons[i].innerText === letter) {
                 game.handleInteraction(buttons[i]);
             }
         }
