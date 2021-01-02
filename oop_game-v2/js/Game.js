@@ -51,8 +51,7 @@ const phraseList = [
             if(pass && numList.every(number => number !== randomListNumber))  {
                 numList.push(randomListNumber);
                 
-                randomPhraseList.push(phrase);
-                
+                randomPhraseList.push(phrase);    
             }  
         }
         console.log(randomPhraseList);
@@ -88,7 +87,8 @@ const phraseList = [
     * If the player wins, call gameOver method.
     * If there is not a match, call removeLife method.
     */
-    handleInteraction(button) {
+
+     handleInteraction(button) {
         if (button.className === 'key') {
             button.disabled = true;
             let letter = button.innerText;
