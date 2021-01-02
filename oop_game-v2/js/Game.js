@@ -40,14 +40,19 @@ const phraseList = [
     createPhrases() {
         let randomPhraseList = [];
         let numList = [];
+        let run = 0;
 
-        while (numList.length < 5) {
+        while (numList.length < 5 && (run <= phraseList.length + 1)) {
+            run += 1;
             let randomListNumber = Math.floor(Math.random() * (phraseList.length));
-    
-            if (numList.every(number => number !== randomListNumber)) {
+            let phrase = {phrase: phraseList[randomListNumber]}
+            
+            let pass = /^[A-Za-z ]+$/.test(phraseList[randomListNumber]);
+            if(pass && numList.every(number => number !== randomListNumber))  {
                 numList.push(randomListNumber);
-                let phrase = {phrase: phraseList[randomListNumber]}
+                
                 randomPhraseList.push(phrase);
+                
             }  
         }
         console.log(randomPhraseList);
