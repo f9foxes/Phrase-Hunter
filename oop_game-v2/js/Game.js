@@ -29,7 +29,7 @@ const phraseList = [
      constructor() {
          this.missed = 0;
          this.phrases = this.createPhrases();
-         this.activePhrase = new Phrase (this.getRandomPhrase());
+         this.activePhrase = null;
      }
 
     /**
@@ -45,7 +45,7 @@ const phraseList = [
         while (numList.length < 5 && (run <= phraseList.length + 1)) {
             run += 1;
             let randomListNumber = Math.floor(Math.random() * (phraseList.length));
-            let phrase = {phrase: phraseList[randomListNumber]}
+            let phrase = new Phrase(phraseList[randomListNumber]);
             
             let pass = /^[A-Za-z ]+$/.test(phraseList[randomListNumber]);
             if(pass && numList.every(number => number !== randomListNumber))  {
@@ -65,7 +65,7 @@ const phraseList = [
 
      getRandomPhrase() {
         let randomPhraseIndex = Math.floor(Math.random() * (this.phrases.length));
-        return this.phrases[randomPhraseIndex];
+        return this.phrases[randomPhraseIndex].phrase;
      }
 
      /**
@@ -76,6 +76,7 @@ const phraseList = [
      startGame() {
         let overlayDiv = document.getElementById('overlay');
         overlayDiv.style.display = 'none';
+        this.activePhrase = new Phrase (this.getRandomPhrase())
         this.activePhrase.addPhraseToDisplay();
      }
 
